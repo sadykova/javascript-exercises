@@ -1,23 +1,24 @@
-const removeFromArray = function (array, element) {
-  for (let i = 0; i < array.length; i++) {
-    if (array[i] == element) {
-      array.splice(i, 1);
-      return array;
+const removeFromArray = function (array, element, ...moreElements) {
+  if (arguments.length === 1) {
+    for (let i = 0; i < array.length; i++) {
+      if (array[i] === element) {
+        array.splice(i, 1);
+        return array;
+      }
     }
+  } else {
+    let args = Array.from(arguments);
+    let newArgs = args.slice(1);
+
+    array = array.filter((item) => !newArgs.includes(item));
+    return array;
   }
 };
 
-console.log(removeFromArray([1, 2, 3, 4], 4));
+console.log(removeFromArray([1, 2, 3, 4], 3, 4));
+console.log(removeFromArray(["hello", 1, 2, 3], "hello", "taco"));
+console.log(removeFromArray[(1, 2, 3, 4)], 1, 2, 3, 4);
+console.log(removeFromArray[((1, "1", 2, 3), "1")]);
 
-// let array = [1, 2, 3, 4];
-// let newArray = [];
-// for (let i = 0; i < array.length; i++) {
-//   if (array[i] === 4) {
-//     newArray = array.splice(i, 1);
-//   }
-// }
-// console.log(newArray);
-// console.log(array);
-
-// // Do not edit below this line
-// module.exports = removeFromArray;
+// Do not edit below this line
+module.exports = removeFromArray;
